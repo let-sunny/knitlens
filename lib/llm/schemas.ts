@@ -15,7 +15,14 @@ export interface RowShape {
   instructions: string;
   repeat: number | null;
   notes: string | null;
-  steps: unknown[];
+  steps: StepShape[];
+}
+
+export interface StepShape {
+  id: string;
+  order: number;
+  instruction: string;
+  stitchCount: number | null;
 }
 
 export interface QuestionShape {
@@ -28,6 +35,15 @@ export interface QuestionShape {
 export interface AnalyzeOutputShape {
   sections: SectionShape[];
   questions: QuestionShape[];
+}
+
+export interface ClarifyOutputShape {
+  questions: QuestionShape[];
+}
+
+export interface CompileOutputShape {
+  patternId: string;
+  sections: SectionShape[];
 }
 
 function isSection(x: unknown): x is SectionShape {
@@ -50,7 +66,19 @@ function isRow(x: unknown): x is RowShape {
     typeof o.instructions === "string" &&
     (o.repeat === null || typeof o.repeat === "number") &&
     (o.notes === null || typeof o.notes === "string") &&
-    Array.isArray(o.steps)
+    Array.isArray(o.steps) &&
+    o.steps.every((s: unknown) => isStep(s))
+  );
+}
+
+function isStep(x: unknown): x is StepShape {
+  if (!x || typeof x !== "object") return false;
+  const o = x as Record<string, unknown>;
+  return (
+    typeof o.id === "string" &&
+    typeof o.order === "number" &&
+    typeof o.instruction === "string" &&
+    (o.stitchCount === null || typeof o.stitchCount === "number")
   );
 }
 
@@ -94,5 +122,44 @@ export function validateAnalyzeOutput(raw: unknown): AnalyzeOutputShape {
   return {
     sections: sections as SectionShape[],
     questions: questions as QuestionShape[],
+  };
+}
+
+export function validateClarifyOutput(raw: unknown): ClarifyOutputShape {
+  if (!raw || typeof raw !== "object") {
+    throw new Error("AI output is not an object");
+  }
+  const o = raw as Record<string, unknown>;
+  if (!Array.isArray(o.questions)) {
+    throw new Error("AI output missing or invalid questions");
+  }
+  const questions = o.questions as unknown[];
+  for (const q of questions) {
+    if (!isQuestion(q)) throw new Error("Invalid question shape");
+  }
+  return { questions: questions as QuestionShape[] };
+}
+
+export function validateCompileOutput(raw: unknown): CompileOutputShape {
+  if (!raw || typeof raw !== "object") {
+    throw new Error("AI output is not an object");
+  }
+  const o = raw as Record<string, unknown>;
+  if (typeof o.patternId !== "string" || !o.patternId.trim()) {
+    throw new Error("AI output missing or invalid patternId");
+  }
+  if (!Array.isArray(o.sections)) {
+    throw new Error("AI output missing or invalid sections");
+  }
+  const sections = o.sections as unknown[];
+  for (const s of sections) {
+    if (!isSection(s)) throw new Error("Invalid section shape");
+    for (const r of (s as SectionShape).rows) {
+      if (!isRow(r)) throw new Error("Invalid row shape in section");
+    }
+  }
+  return {
+    patternId: o.patternId.trim(),
+    sections: sections as SectionShape[],
   };
 }

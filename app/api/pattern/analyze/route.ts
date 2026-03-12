@@ -30,6 +30,28 @@ function validateBody(body: unknown): {
   return { projectId: o.projectId.trim(), patternText: o.patternText.trim() };
 }
 
+function humanizeLlmError(err: unknown): string {
+  if (!(err instanceof Error)) {
+    return "패턴을 분석하는 중 알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
+  }
+  const msg = err.message;
+
+  if (msg.includes("OPENAI_API_KEY is not set")) {
+    return "AI 설정이 완료되지 않았습니다. OPENAI_API_KEY 환경 변수를 확인한 뒤 다시 시도해 주세요.";
+  }
+  if (
+    msg.includes("insufficient_quota") ||
+    msg.includes("You exceeded your current quota")
+  ) {
+    return "AI 사용 한도를 초과했습니다. OpenAI Billing 설정을 확인한 뒤 다시 시도해 주세요.";
+  }
+  if (msg.includes("401") || msg.includes("invalid_api_key")) {
+    return "AI 키가 올바르지 않습니다. OPENAI_API_KEY 값을 확인해 주세요.";
+  }
+
+  return "패턴을 분석하는 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -56,8 +78,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: "analysis_failed",
-          message:
-            err instanceof Error ? err.message : "Pattern analysis failed",
+          message: humanizeLlmError(err),
         },
         { status: 500 }
       );
@@ -116,7 +137,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: "analysis_failed",
-        message: err instanceof Error ? err.message : "Pattern analysis failed",
+        message: humanizeLlmError(err),
       },
       { status: 500 }
     );

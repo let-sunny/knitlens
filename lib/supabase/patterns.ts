@@ -39,6 +39,39 @@ export async function createPattern(
   return data;
 }
 
+export async function getPatternById(
+  id: string
+): Promise<PatternRow | null> {
+  const supabase = createServerSupabase();
+  const { data, error } = await supabase
+    .from("patterns")
+    .select()
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    if (error.code === "PGRST116") return null;
+    throw error;
+  }
+  return data;
+}
+
+export async function updatePatternSections(
+  id: string,
+  sections: SectionRecord[]
+): Promise<PatternRow> {
+  const supabase = createServerSupabase();
+  const { data, error } = await supabase
+    .from("patterns")
+    .update({ sections })
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
 export interface ClarificationQuestionRecord {
   id: string;
   text: string;
