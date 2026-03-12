@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KnitTracker v1.0 - Macintosh System 7 Style</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#135bec",
+                "background-light": "#f6f6f8",
+                "background-dark": "#101622",
+                "mac-gray": "#cccccc",
+                "mac-border-light": "#ffffff",
+                "mac-border-dark": "#808080",
+                "mac-black": "#000000"
+              },
+              fontFamily: {
+                "display": ["Inter", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .mac-window-shadow {
+            box-shadow: 1px 1px 0px #000000;
+        }
+        .mac-border {
+            border: 1px solid #000000;
+            box-shadow: inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080;
+        }
+        .mac-inset {
+            border: 1px solid #808080;
+            box-shadow: inset 1px 1px 0px #000000, 1px 1px 0px #ffffff;
+            background-color: #ffffff;
+        }
+        .mac-button {
+            border: 1px solid #000000;
+            box-shadow: inset 1px 1px 0px #ffffff, 1px 1px 0px #808080;
+            background-color: #cccccc;
+        }
+        .mac-button:active {
+            box-shadow: inset 1px 1px 0px #808080;
+            transform: translate(1px, 1px);
+        }
+        .title-bar-stripes {
+            background-image: repeating-linear-gradient(0deg, #000, #000 1px, transparent 1px, transparent 2px);
+            background-size: 100% 2px;
+        }
+    </style>
+</head>
+<body class="bg-[#55aaaa] font-display text-mac-black min-h-screen flex items-center justify-center p-4">
+<!-- Desktop Environment Simulation -->
+<div class="w-full max-w-5xl h-[800px] flex flex-col mac-window-shadow bg-mac-gray border-2 border-mac-black relative overflow-hidden">
+<!-- Top Menu Bar (System 7 Style) -->
+<div class="h-6 bg-white border-b border-mac-black flex items-center px-4 gap-6 text-sm font-bold">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">ios</span>
+</div>
+<span>File</span>
+<span>Edit</span>
+<span>Project</span>
+<span>Tools</span>
+<div class="flex-1"></div>
+<div class="flex items-center gap-2">
+<span>9:41 AM</span>
+<span class="material-symbols-outlined text-base">search</span>
+</div>
+</div>
+<!-- Main Window Container -->
+<div class="flex-1 flex flex-col p-1">
+<div class="flex-1 flex flex-col bg-mac-gray border border-mac-black">
+<!-- Window Title Bar -->
+<div class="h-6 flex items-center px-1 border-b border-mac-black bg-mac-gray">
+<div class="w-4 h-4 mac-button flex items-center justify-center">
+<div class="w-2 h-[1px] bg-mac-black"></div>
+</div>
+<div class="flex-1 mx-2 flex items-center justify-center relative">
+<div class="absolute inset-0 title-bar-stripes opacity-20"></div>
+<span class="bg-mac-gray px-4 text-xs font-bold z-10">KnitTracker - Fair Isle Sweater Project</span>
+</div>
+<div class="flex gap-1">
+<div class="w-4 h-4 mac-button flex flex-col items-center justify-center gap-[1px]">
+<div class="w-2 h-[1px] bg-mac-black"></div>
+<div class="w-2 h-[1px] bg-mac-black"></div>
+</div>
+</div>
+</div>
+<!-- Window Content -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Sidebar: Sections -->
+<div class="w-48 border-r border-mac-black flex flex-col bg-white">
+<div class="p-2 border-b border-mac-black bg-mac-gray text-[10px] font-bold uppercase tracking-wider">
+                            Project Sections
+                        </div>
+<div class="flex-1 overflow-y-auto">
+<div class="p-2 flex items-center gap-2 hover:bg-primary hover:text-white cursor-pointer group">
+<span class="material-symbols-outlined text-sm">folder</span>
+<span class="text-xs">Cast On</span>
+</div>
+<div class="p-2 flex items-center gap-2 hover:bg-primary hover:text-white cursor-pointer group">
+<span class="material-symbols-outlined text-sm">folder</span>
+<span class="text-xs">Ribbing</span>
+</div>
+<div class="p-2 flex items-center gap-2 bg-primary text-white cursor-pointer">
+<span class="material-symbols-outlined text-sm">folder_open</span>
+<span class="text-xs font-bold">Body Pattern</span>
+</div>
+<div class="p-2 flex items-center gap-2 hover:bg-primary hover:text-white cursor-pointer group">
+<span class="material-symbols-outlined text-sm">folder</span>
+<span class="text-xs">Sleeve Left</span>
+</div>
+<div class="p-2 flex items-center gap-2 hover:bg-primary hover:text-white cursor-pointer group">
+<span class="material-symbols-outlined text-sm">folder</span>
+<span class="text-xs">Sleeve Right</span>
+</div>
+<div class="p-2 flex items-center gap-2 hover:bg-primary hover:text-white cursor-pointer group">
+<span class="material-symbols-outlined text-sm">folder</span>
+<span class="text-xs">Neckline</span>
+</div>
+</div>
+<div class="p-2 border-t border-mac-black bg-mac-gray">
+<button class="w-full mac-button py-1 text-[10px] font-bold">NEW SECTION</button>
+</div>
+</div>
+<!-- Main Area: Steps -->
+<div class="flex-1 flex flex-col bg-white overflow-hidden">
+<!-- Toolbar -->
+<div class="h-10 border-b border-mac-black bg-mac-gray flex items-center px-4 gap-4">
+<button class="mac-button px-3 py-1 flex items-center gap-1 text-xs">
+<span class="material-symbols-outlined text-sm">add_task</span> Add Step
+                            </button>
+<button class="mac-button px-3 py-1 flex items-center gap-1 text-xs">
+<span class="material-symbols-outlined text-sm">edit</span> Edit
+                            </button>
+<div class="h-6 w-[1px] bg-mac-border-dark mx-2"></div>
+<span class="text-xs font-bold">Section: Body Pattern</span>
+</div>
+<!-- Content Steps -->
+<div class="flex-1 overflow-y-auto p-6 space-y-4">
+<!-- Step Item 1 (Completed) -->
+<div class="flex items-start gap-4 p-3 border border-transparent">
+<div class="mt-1">
+<input checked="" class="w-5 h-5 border-2 border-mac-black rounded-none text-primary focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex-1">
+<h3 class="text-sm font-bold line-through text-mac-border-dark">Setup Row (WS)</h3>
+<p class="text-xs text-mac-border-dark">Purl all stitches, decreasing 4 sts evenly across row.</p>
+</div>
+</div>
+<!-- Step Item 2 (Active) -->
+<div class="flex items-start gap-4 p-3 mac-inset">
+<div class="mt-1">
+<input class="w-5 h-5 border-2 border-mac-black rounded-none text-primary focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex-1">
+<h3 class="text-sm font-bold">Fair Isle Pattern A</h3>
+<p class="text-xs mb-3">Work Rows 1-12 of Chart A, alternating MC and CC1.</p>
+<!-- Repeat Counter Component -->
+<div class="inline-flex items-center gap-4 bg-mac-gray p-2 border border-mac-black mac-window-shadow">
+<span class="text-xs font-bold px-2">Repeat Progress:</span>
+<div class="flex items-center gap-2">
+<button class="mac-button w-6 h-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<div class="w-16 text-center text-sm font-bold bg-white border border-mac-black py-0.5">
+                                                3 / 5
+                                            </div>
+<button class="mac-button w-6 h-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+<div class="text-[10px] font-bold text-primary italic uppercase self-center">Active Step</div>
+</div>
+<!-- Step Item 3 -->
+<div class="flex items-start gap-4 p-3 border border-transparent opacity-60">
+<div class="mt-1">
+<input class="w-5 h-5 border-2 border-mac-black rounded-none text-primary focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex-1">
+<h3 class="text-sm font-bold">Transition Row</h3>
+<p class="text-xs italic">Switch to smaller needles and MC only.</p>
+</div>
+</div>
+<!-- Step Item 4 (Repeat) -->
+<div class="flex items-start gap-4 p-3 border border-transparent opacity-60">
+<div class="mt-1">
+<input class="w-5 h-5 border-2 border-mac-black rounded-none text-primary focus:ring-0" type="checkbox"/>
+</div>
+<div class="flex-1">
+<h3 class="text-sm font-bold">Pattern B - Small Motif</h3>
+<p class="text-xs mb-3">Work Rows 1-4 of Chart B twice.</p>
+<div class="inline-flex items-center gap-4 bg-mac-gray p-2 border border-mac-black">
+<span class="text-xs font-bold px-2">Repeat Progress:</span>
+<div class="flex items-center gap-2">
+<button class="mac-button w-6 h-6 flex items-center justify-center opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<div class="w-16 text-center text-sm font-bold bg-white border border-mac-black py-0.5">
+                                                0 / 2
+                                            </div>
+<button class="mac-button w-6 h-6 flex items-center justify-center opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Bar & Footer -->
+<div class="h-16 border-t border-mac-black bg-mac-gray flex flex-col p-3 gap-1">
+<div class="flex justify-between text-[10px] font-bold uppercase">
+<span>Overall Project Progress</span>
+<span>42% Complete</span>
+</div>
+<div class="flex-1 mac-inset p-[2px] relative overflow-hidden">
+<!-- Progress Bar Stripes (Classic Macintosh look) -->
+<div class="h-full bg-primary w-[42%] relative">
+<div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(45deg, rgba(255,255,255,.3) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.3) 50%, rgba(255,255,255,.3) 75%, transparent 75%, transparent); background-size: 20px 20px;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- System-style Status Bar / Footer -->
+<div class="h-6 bg-mac-gray border-t border-mac-black flex items-center px-4 gap-4 text-[10px] font-bold">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">hard_drive</span>
+<span>System 7.1 HD</span>
+</div>
+<div class="flex-1"></div>
+<div class="flex items-center gap-3">
+<span>Free Memory: 14,204K</span>
+<span class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[14px]">sync</span> Synced
+                </span>
+</div>
+</div>
+<!-- Decorative Window Corner Grabber -->
+<div class="absolute bottom-6 right-0 w-4 h-4 cursor-nwse-resize flex flex-col items-end justify-end p-[2px]">
+<div class="w-3 h-[1px] bg-mac-black"></div>
+<div class="w-2 h-[1px] bg-mac-black mt-[2px]"></div>
+<div class="w-1 h-[1px] bg-mac-black mt-[2px]"></div>
+</div>
+</div>
+<!-- Floating Macintosh Icon (Decorative) -->
+<div class="fixed top-12 right-12 flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 flex items-center justify-center bg-white border border-mac-black mac-window-shadow group-hover:bg-primary">
+<span class="material-symbols-outlined text-3xl group-hover:text-white">description</span>
+</div>
+<span class="bg-white px-1 text-[10px] border border-mac-black group-hover:bg-primary group-hover:text-white">Pattern.pdf</span>
+</div>
+<div class="fixed top-40 right-12 flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 flex items-center justify-center bg-white border border-mac-black mac-window-shadow group-hover:bg-primary">
+<span class="material-symbols-outlined text-3xl group-hover:text-white">folder</span>
+</div>
+<span class="bg-white px-1 text-[10px] border border-mac-black group-hover:bg-primary group-hover:text-white">Resources</span>
+</div>
+<div class="fixed bottom-12 right-12 flex flex-col items-center gap-1 group cursor-pointer">
+<div class="w-12 h-12 flex items-center justify-center bg-white border border-mac-black mac-window-shadow group-hover:bg-primary">
+<span class="material-symbols-outlined text-3xl group-hover:text-white">delete</span>
+</div>
+<span class="bg-white px-1 text-[10px] border border-mac-black group-hover:bg-primary group-hover:text-white">Trash</span>
+</div>
+</body></html>

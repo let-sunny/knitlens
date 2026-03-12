@@ -1,0 +1,233 @@
+{
+  "__comment": "KnitLens Cursor hooks configuration scaffold. `categories` are design docs; `hooks` matches Cursor's official hooks.json schema.",
+  "version": 1,
+  "categories": {
+    "foundation": {
+      "description": "App Router structure, fixed stack, and separation of concerns.",
+      "hooks": [
+        {
+          "name": "foundation.app-router-structure",
+          "severity": "warn",
+          "description": "When files under app/ are created or edited, check that App Router conventions are followed (page.tsx, layout.tsx, route.ts) and flag suspicious file placement.",
+          "triggers": {
+            "globs": ["app/**"],
+            "events": ["fileCreated", "fileModified"]
+          },
+          "checks": [
+            "TODO: Detect route files that do not follow Next.js App Router naming (page.tsx, layout.tsx, route.ts).",
+            "TODO: Warn when deeply nested files under app/ look like shared UI that should instead live under the shared components directory."
+          ]
+        },
+        {
+          "name": "foundation.db-logic-in-ui",
+          "severity": "warn",
+          "description": "Warn when DB logic or raw SQL appears inside UI components (pages, layouts, presentational components).",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileCreated", "fileModified"]
+          },
+          "checks": [
+            "TODO: Look for imports of Supabase clients, SQL strings, or direct DB helpers inside UI files.",
+            "TODO: Suggest moving DB access into server-only helpers (e.g., lib/ or server/ modules)."
+          ]
+        },
+        {
+          "name": "foundation.duplicate-shared-ui",
+          "severity": "warn",
+          "description": "Warn when similar UI blocks are duplicated instead of being extracted into shared retro wrapper components.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Heuristically detect repeated JSX structures that could be shared retro primitives (e.g., window shells, toolbars, panels)."
+          ]
+        }
+      ]
+    },
+    "serverVsClient": {
+      "description": "Server Components by default; Client Components only for necessary interactivity.",
+      "hooks": [
+        {
+          "name": "server-vs-client.new-use-client",
+          "severity": "warn",
+          "description": "Detect new \"use client\" additions and require a short justification comment or note.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Detect added \"use client\" directives.",
+            "TODO: Warn if no nearby comment or note explains why client-side behavior is required."
+          ]
+        },
+        {
+          "name": "server-vs-client.large-client-component",
+          "severity": "warn",
+          "description": "Warn when large components are marked as client unnecessarily (too many lines or responsibilities).",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Approximate component size (lines/complexity) and warn when large client components might be split into server + small client wrappers."
+          ]
+        },
+        {
+          "name": "server-vs-client.client-data-fetching",
+          "severity": "warn",
+          "description": "Warn if data fetching is moved into client components without a clear reason.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Detect fetch/Supabase/DB helper calls inside client components and suggest moving them to server code unless strictly necessary."
+          ]
+        }
+      ]
+    },
+    "uiRetro": {
+      "description": "Retro Macintosh-style UI and system.css design baseline.",
+      "hooks": [
+        {
+          "name": "ui-retro.disallowed-modern-effects",
+          "severity": "warn",
+          "description": "Detect styling patterns that violate the retro system.css baseline (large shadows, glassmorphism, strong blur, oversized radius, heavy gradients, excessive animation).",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx", "app/**/*.css"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Search for CSS/Tailwind patterns such as box-shadow with large blur/spread, backdrop-filter: blur, very large border-radius, and gradient-heavy backgrounds.",
+            "TODO: Warn on long or complex animation/transition definitions that do not match retro expectations."
+          ]
+        },
+        {
+          "name": "ui-retro.missing-system-css-wrappers",
+          "severity": "warn",
+          "description": "Warn when system.css-friendly wrapper components are not used where they should be.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Heuristically detect repeated window/panel/button patterns that should use shared retro primitives instead of inline markup and classes."
+          ]
+        }
+      ]
+    },
+    "aiJsonIntegrity": {
+      "description": "LLM routes must use JSON-only contracts, schema validation, and raw text preservation.",
+      "hooks": [
+        {
+          "name": "ai-json.routes-require-schemas",
+          "severity": "block",
+          "description": "For LLM routes or AI handlers, require presence of input/output schemas and runtime validation.",
+          "triggers": {
+            "globs": ["app/api/**/route.ts", "lib/**/llm/**.ts", "lib/**/ai/**.ts"],
+            "events": ["fileCreated", "fileModified"]
+          },
+          "checks": [
+            "TODO: Detect definitions of input/output types and corresponding runtime validators.",
+            "TODO: Block or strongly warn when AI routes lack explicit schemas or validation."
+          ]
+        },
+        {
+          "name": "ai-json.json-only-response-handling",
+          "severity": "block",
+          "description": "Require JSON-only response handling for AI routes and warn if free-form or markdown output is relied on.",
+          "triggers": {
+            "globs": ["app/api/**/route.ts", "lib/**/llm/**.ts", "lib/**/ai/**.ts"],
+            "events": ["fileCreated", "fileModified"]
+          },
+          "checks": [
+            "TODO: Ensure responses are parsed and returned as JSON objects only.",
+            "TODO: Detect patterns that directly render or store arbitrary text from LLMs without enforcing JSON structure."
+          ]
+        },
+        {
+          "name": "ai-json.raw-text-preservation",
+          "severity": "warn",
+          "description": "Warn if raw source text preservation is missing when using LLMs to transform user or external text.",
+          "triggers": {
+            "globs": ["app/api/**/route.ts", "lib/**/llm/**.ts", "lib/**/ai/**.ts"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Heuristically check that raw input text is stored or passed alongside structured LLM output."
+          ]
+        },
+        {
+          "name": "ai-json.provider-in-client-code",
+          "severity": "block",
+          "description": "Warn or block if LLM provider calls appear in client-side code.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Detect imports of LLM SDKs or provider clients in client components and require calls to go through server routes or actions instead."
+          ]
+        }
+      ]
+    },
+    "supabaseData": {
+      "description": "Supabase DB logic must stay in server-only modules and out of presentational UI.",
+      "hooks": [
+        {
+          "name": "supabase.client-in-client-component",
+          "severity": "block",
+          "description": "Warn or block if Supabase client usage appears inside Client Components.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Detect imports of Supabase client libraries and their usage in files marked with \"use client\"."
+          ]
+        },
+        {
+          "name": "supabase.db-logic-in-ui",
+          "severity": "warn",
+          "description": "Warn if DB access logic is mixed into presentational UI components.",
+          "triggers": {
+            "globs": ["app/**/*.tsx", "components/**/*.tsx"],
+            "events": ["fileModified"]
+          },
+          "checks": [
+            "TODO: Look for direct table queries or DB helper calls inside components that primarily render UI.",
+            "TODO: Suggest moving DB logic into dedicated server-only helpers or route handlers."
+          ]
+        },
+        {
+          "name": "supabase.encourage-server-helpers",
+          "severity": "warn",
+          "description": "Encourage use of server-only helpers or route handlers for Supabase CRUD instead of inline logic.",
+          "triggers": {
+            "globs": ["lib/**/*.ts", "server/**/*.ts", "app/api/**/route.ts"],
+            "events": ["fileCreated", "fileModified"]
+          },
+          "checks": [
+            "TODO: Nudge toward central Supabase CRUD helpers for each entity and discourage ad-hoc queries scattered across the codebase."
+          ]
+        }
+      ]
+    }
+  },
+  "hooks": {
+    "sessionEnd": [
+      {
+        "command": "node .cursor/hooks/append-workflow-log.js",
+        "timeout": 5
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": "node .cursor/hooks/append-workflow-log.js",
+        "timeout": 5
+      }
+    ]
+  }
+}
+

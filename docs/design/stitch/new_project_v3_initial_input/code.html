@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knitting App - New Project</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* System 7 Style Overrides */
+        .sys7-border {
+            border: 2px solid black;
+            box-shadow: 2px 2px 0px 0px black;
+        }
+        .sys7-inset {
+            border: 2px solid black;
+            box-shadow: inset 1px 1px 0px 0px #808080;
+            background-color: white;
+        }
+        .sys7-header {
+            border-bottom: 2px solid black;
+            background: repeating-linear-gradient(0deg, #000, #000 1px, transparent 1px, transparent 2px);
+            background-size: 100% 2px;
+        }
+        .sys7-button {
+            border: 2px solid black;
+            box-shadow: 1px 1px 0px 0px black;
+            background-color: white;
+            transition: transform 0.1s;
+        }
+        .sys7-button:active {
+            transform: translate(1px, 1px);
+            box-shadow: 0px 0px 0px 0px black;
+        }
+        .sys7-window-title {
+            background-color: white;
+            border: 2px solid black;
+            padding: 2px 10px;
+        }
+        .sys7-pattern {
+            background-image: radial-gradient(#ccc 1px, transparent 1px);
+            background-size: 4px 4px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark p-4 md:p-10 sys7-pattern">
+<!-- Desktop Navigation Simulation -->
+<div class="max-w-4xl mx-auto w-full mb-6 flex justify-between items-center border-b-2 border-black pb-1">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+<span class="font-bold uppercase tracking-wider text-sm">File</span>
+<span class="font-bold uppercase tracking-wider text-sm">Edit</span>
+<span class="font-bold uppercase tracking-wider text-sm">View</span>
+<span class="font-bold uppercase tracking-wider text-sm">Label</span>
+<span class="font-bold uppercase tracking-wider text-sm">Special</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-bold">12:00 PM</span>
+</div>
+</div>
+<!-- Main Window Container -->
+<div class="max-w-3xl mx-auto w-full sys7-border bg-white overflow-hidden">
+<!-- Title Bar -->
+<div class="h-8 flex items-center justify-between px-2 sys7-header bg-white">
+<div class="flex gap-1">
+<div class="size-4 border-2 border-black bg-white"></div>
+</div>
+<div class="sys7-window-title font-bold text-sm">New Project</div>
+<div class="flex gap-1">
+<div class="size-4 border-2 border-black bg-white flex items-center justify-center">
+<div class="size-2 border-t-2 border-black"></div>
+</div>
+</div>
+</div>
+<!-- Toolbar / Breadcrumb Area -->
+<div class="border-b-2 border-black p-4 flex gap-6 bg-[#eeeeee]">
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="size-10 border-2 border-black bg-white flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined">home</span>
+</div>
+<span class="text-[10px] font-bold uppercase">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="size-10 border-2 border-black bg-primary text-white flex items-center justify-center">
+<span class="material-symbols-outlined">add_box</span>
+</div>
+<span class="text-[10px] font-bold uppercase">New</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="size-10 border-2 border-black bg-white flex items-center justify-center group-hover:bg-primary/10">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="text-[10px] font-bold uppercase">Patterns</span>
+</div>
+</div>
+<!-- Form Content -->
+<div class="p-8 space-y-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-2xl font-bold tracking-tight">New Project</h1>
+<p class="text-sm text-slate-600">Enter your pattern details to start tracking your progress.</p>
+</div>
+<!-- Project Title Input -->
+<div class="flex flex-col gap-2">
+<label class="font-bold text-sm uppercase">Project Title</label>
+<input class="sys7-inset w-full p-3 focus:outline-none focus:ring-2 focus:ring-primary/50 text-base" placeholder="Untitled Knitting Project" type="text"/>
+</div>
+<!-- Size Selector Dropdown -->
+<!-- Pattern Textarea -->
+<div class="flex flex-col gap-2">
+<label class="font-bold text-sm uppercase">Pattern Text</label>
+<div class="sys7-inset p-1">
+<textarea class="w-full p-3 border-none focus:ring-0 text-base resize-none font-mono leading-relaxed" placeholder="Paste your knitting pattern here (e.g., Row 1: K2, P2...)" rows="8"></textarea>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t-2 border-black border-dotted">
+<div class="flex items-center gap-2 text-xs font-bold text-slate-500">
+<span class="material-symbols-outlined text-sm">info</span>
+                    SYSTEM 7.5.3 COMPATIBLE
+                </div>
+<div class="flex gap-4">
+<button class="sys7-button px-6 py-2 font-bold uppercase text-sm hover:bg-slate-50">
+                        Cancel
+                    </button>
+<button class="sys7-button bg-primary text-white px-8 py-2 font-bold uppercase text-sm flex items-center gap-2 hover:bg-primary/90">
+<span class="material-symbols-outlined text-lg">analytics</span>
+                        Analyze Pattern
+                    </button>
+</div>
+</div>
+</div>
+<!-- Status Bar -->
+<div class="bg-[#eeeeee] border-t-2 border-black p-2 flex justify-between text-[10px] font-bold uppercase">
+<span>Ready to stitch</span>
+<div class="flex gap-4">
+<span>Disk space: 420K free</span>
+<span>Project ID: #8821</span>
+</div>
+</div>
+</div>
+<!-- Bottom Footer Elements -->
+<div class="max-w-4xl mx-auto w-full mt-8 flex justify-end gap-12">
+<div class="flex flex-col items-center gap-1 opacity-80 grayscale">
+<div class="size-12 border-2 border-black bg-white flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">delete</span>
+</div>
+<span class="text-[10px] font-bold uppercase">Trash</span>
+</div>
+</div>
+</div>
+</body></html>
