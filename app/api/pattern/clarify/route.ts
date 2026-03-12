@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPatternById } from "@/lib/supabase/patterns";
 import { getProjectById } from "@/lib/supabase/projects";
-import { getPatternSourceByProjectId } from "@/lib/supabase/pattern-sources";
+import { getProjectFullPatternText } from "@/lib/supabase/projects";
 import {
   insertClarificationAnswers,
   type ClarificationAnswerRecord,
@@ -108,11 +108,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let patternText = project.rawPatternText;
-    if (!patternText) {
-      const source = await getPatternSourceByProjectId(project.id);
-      patternText = source?.extractedText ?? null;
-    }
+    const patternText = await getProjectFullPatternText(project.id);
     if (!patternText) {
       return NextResponse.json(
         {

@@ -4,7 +4,10 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createProject, updateProject } from "@/lib/supabase/projects";
 import { createPatternSource } from "@/lib/supabase/pattern-sources";
-import { uploadPatternPdf } from "@/lib/supabase/storage";
+import {
+  uploadPatternPdf,
+  uploadExtractedText,
+} from "@/lib/supabase/storage";
 import { extractTextFromPdfBuffer } from "@/lib/pdf/extract-text";
 
 export type AnalyzeResult =
@@ -62,18 +65,23 @@ export async function analyzePattern(
   }
 
   try {
+    const extractedPath = await uploadExtractedText(projectId, patternText);
     await updateProject(projectId, {
       patternPdfUrl: path,
-      rawPatternText: patternText,
+      extractedTextUrl: extractedPath,
     });
-    await createPatternSource(projectId, {
-      fileUrl: path,
-      extractedText: patternText,
-    });
-  } catch {
+    await createPatternSource(projectId, { fileUrl: path });
+  } catch (err) {
+    const message =
+      (err as { message?: string }).message ??
+      (err instanceof Error ? err.message : String(err));
+    console.error("[analyzePattern] save failed:", message, err);
     return {
       ok: false,
-      error: "저장 중 오류가 발생했습니다. 다시 시도해 주세요.",
+      error:
+        process.env.NODE_ENV === "development"
+          ? `저장 중 오류: ${message}`
+          : "저장 중 오류가 발생했습니다. 다시 시도해 주세요.",
     };
   }
 
@@ -87,7 +95,7 @@ export async function analyzePattern(
     res = await fetch(`${base}/api/pattern/analyze`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ projectId, patternText }),
+      body: JSON.stringify({ projectId }),
     });
   } catch {
     return {

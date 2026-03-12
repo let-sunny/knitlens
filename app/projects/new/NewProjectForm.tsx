@@ -7,14 +7,21 @@ import { analyzePattern, type AnalyzeResult } from "./actions";
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="btn"
-      aria-busy={pending}
-    >
-      {pending ? "분석 중…" : "Analyze Pattern"}
-    </button>
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+      <button
+        type="submit"
+        disabled={pending}
+        className="btn"
+        aria-busy={pending}
+      >
+        {pending ? "분석 중…" : "Analyze Pattern"}
+      </button>
+      {pending && (
+        <p style={{ fontSize: "0.75rem", color: "#6b7280", margin: 0 }}>
+          긴 도안은 AI 분석에 1–2분 걸릴 수 있습니다.
+        </p>
+      )}
+    </div>
   );
 }
 

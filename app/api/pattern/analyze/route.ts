@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getProjectById, updateProject } from "@/lib/supabase/projects";
+
+export const maxDuration = 300;
+
+import {
+  getProjectById,
+  getProjectFullPatternText,
+  updateProject,
+} from "@/lib/supabase/projects";
 import {
   createPattern,
   insertClarificationQuestions,
@@ -15,7 +22,7 @@ import { validateAnalyzeOutput } from "@/lib/llm/schemas";
 
 function validateBody(body: unknown): {
   projectId: string;
-  patternText: string;
+  patternText: string | null;
 } {
   if (!body || typeof body !== "object") {
     throw new Error("Request body must be a JSON object");
@@ -24,10 +31,11 @@ function validateBody(body: unknown): {
   if (typeof o.projectId !== "string" || !o.projectId.trim()) {
     throw new Error("projectId is required and must be a non-empty string");
   }
-  if (typeof o.patternText !== "string" || !o.patternText.trim()) {
-    throw new Error("patternText is required and must be a non-empty string");
-  }
-  return { projectId: o.projectId.trim(), patternText: o.patternText.trim() };
+  const patternText =
+    typeof o.patternText === "string" && o.patternText.trim()
+      ? o.patternText.trim()
+      : null;
+  return { projectId: o.projectId.trim(), patternText };
 }
 
 function humanizeLlmError(err: unknown): string {
@@ -55,13 +63,25 @@ function humanizeLlmError(err: unknown): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { projectId, patternText } = validateBody(body);
+    const { projectId, patternText: bodyPatternText } = validateBody(body);
 
     const project = await getProjectById(projectId);
     if (!project) {
       return NextResponse.json(
         { error: "project_not_found", message: "Project not found" },
         { status: 404 }
+      );
+    }
+
+    const patternText =
+      bodyPatternText ?? (await getProjectFullPatternText(projectId));
+    if (!patternText || !patternText.trim()) {
+      return NextResponse.json(
+        {
+          error: "analysis_failed",
+          message: "Pattern text is missing. Save the project first.",
+        },
+        { status: 400 }
       );
     }
 

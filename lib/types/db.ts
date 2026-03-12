@@ -11,6 +11,7 @@ export interface ProjectRow {
   title: string;
   pattern_pdf_url: string | null;
   raw_pattern_text: string | null;
+  extracted_text_url: string | null;
   status: ProjectStatus;
   created_at: string;
   updated_at: string;
@@ -22,6 +23,7 @@ export interface Project {
   title: string;
   patternPdfUrl: string | null;
   rawPatternText: string | null;
+  extractedTextUrl: string | null;
   status: ProjectStatus;
   createdAt: string;
   updatedAt: string;
@@ -53,6 +55,7 @@ function projectRowToEntity(row: ProjectRow): Project {
     title: row.title,
     patternPdfUrl: row.pattern_pdf_url,
     rawPatternText: row.raw_pattern_text,
+    extractedTextUrl: row.extracted_text_url ?? null,
     status: row.status,
     createdAt: row.created_at,
     updatedAt: row.updated_at,

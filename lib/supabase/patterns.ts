@@ -56,6 +56,22 @@ export async function getPatternById(
   return data;
 }
 
+export async function getLatestPatternByProjectId(
+  projectId: string
+): Promise<PatternRow | null> {
+  const supabase = createServerSupabase();
+  const { data, error } = await supabase
+    .from("patterns")
+    .select()
+    .eq("project_id", projectId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data;
+}
+
 export async function updatePatternSections(
   id: string,
   sections: SectionRecord[]

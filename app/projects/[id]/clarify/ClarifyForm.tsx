@@ -108,6 +108,7 @@ export function ClarifyForm({
           patternId,
           answers: mergedAnswers,
         }),
+        signal: AbortSignal.timeout(5 * 60 * 1000),
       });
 
       if (!compileRes.ok) {
@@ -208,7 +209,7 @@ export function ClarifyForm({
           {error}
         </p>
       )}
-      <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "flex-end", gap: "0.75rem" }}>
+      <div style={{ marginTop: "1.5rem", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.5rem" }}>
         <button
           type="submit"
           className="btn"
@@ -216,6 +217,11 @@ export function ClarifyForm({
         >
           {submitting ? "처리 중..." : "Submit"}
         </button>
+        {submitting && (
+          <p style={{ fontSize: "0.75rem", color: "#6b7280", margin: 0 }}>
+            AI가 답변을 반영해 처리·컴파일하는 중입니다. 1–3분 걸릴 수 있습니다.
+          </p>
+        )}
       </div>
     </form>
   );

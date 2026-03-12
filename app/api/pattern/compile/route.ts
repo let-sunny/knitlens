@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+
+/** Compile sends full pattern text to LLM; allow up to 5 minutes. */
+export const maxDuration = 300;
+
 import {
   getPatternById,
   updatePatternSections,
   type SectionRecord,
 } from "@/lib/supabase/patterns";
 import { getProjectById, updateProject } from "@/lib/supabase/projects";
-import { getPatternSourceByProjectId } from "@/lib/supabase/pattern-sources";
+import { getProjectFullPatternText } from "@/lib/supabase/projects";
 import type { ClarificationAnswerRecord } from "@/lib/supabase/clarification-answers";
 import { completeJson } from "@/lib/llm/client";
 import {
@@ -74,6 +78,7 @@ function humanizeLlmError(err: unknown): string {
 }
 
 export async function POST(request: NextRequest) {
+  console.log("[compile] POST request received");
   try {
     const rawBody = await request.json();
     let body: RequestBody;
@@ -106,11 +111,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let patternText = project.rawPatternText;
-    if (!patternText) {
-      const source = await getPatternSourceByProjectId(project.id);
-      patternText = source?.extractedText ?? null;
-    }
+    const patternText = await getProjectFullPatternText(project.id);
+    console.log("[compile] patternText length:", patternText?.length ?? 0);
     if (!patternText) {
       return NextResponse.json(
         {
@@ -123,6 +125,7 @@ export async function POST(request: NextRequest) {
 
     const llmAnswers: ClarificationAnswerRecord[] = body.answers;
 
+    console.log("[compile] calling LLM...");
     let rawJson: string;
     try {
       rawJson = await completeJson(

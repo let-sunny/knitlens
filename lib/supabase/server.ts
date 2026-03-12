@@ -24,3 +24,6 @@ export function createServerSupabase() {
 
 /** Storage bucket name for pattern PDFs (create in Supabase Dashboard if missing). */
 export const PATTERN_PDFS_BUCKET = "pattern-pdfs";
+
+/** Storage bucket for extracted pattern text (separate from PDFs so MIME allowlist can include text/plain). */
+export const EXTRACTED_TEXT_BUCKET = "pattern-extracted-text";

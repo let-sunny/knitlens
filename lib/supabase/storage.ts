@@ -1,5 +1,9 @@
 import "server-only";
-import { createServerSupabase, PATTERN_PDFS_BUCKET } from "./server";
+import {
+  createServerSupabase,
+  PATTERN_PDFS_BUCKET,
+  EXTRACTED_TEXT_BUCKET,
+} from "./server";
 
 /**
  * Upload a PDF file to the pattern-pdfs bucket and return its public path (for signed URL or storage URL).
@@ -44,4 +48,43 @@ export async function downloadStorageFile(path: string): Promise<Buffer> {
   if (error) throw error;
   if (!data) throw new Error("No file data returned");
   return Buffer.from(await data.arrayBuffer());
+}
+
+/** Path for extracted text file in Storage (in EXTRACTED_TEXT_BUCKET). */
+const EXTRACTED_TEXT_PATH = (projectId: string) =>
+  `${projectId}/extracted.txt`;
+
+/**
+ * Upload extracted pattern text to Storage for long texts (avoids DB/request body size limits).
+ * Bucket (pattern-extracted-text) should allow MIME type text/plain.
+ */
+export async function uploadExtractedText(
+  projectId: string,
+  text: string
+): Promise<string> {
+  const supabase = createServerSupabase();
+  const path = EXTRACTED_TEXT_PATH(projectId);
+  const { error } = await supabase.storage
+    .from(EXTRACTED_TEXT_BUCKET)
+    .upload(path, Buffer.from(text, "utf-8"), {
+      contentType: "text/plain",
+      upsert: true,
+    });
+
+  if (error) throw error;
+  return path;
+}
+
+/**
+ * Download extracted pattern text from Storage (when stored at extracted_text_url).
+ */
+export async function downloadExtractedText(path: string): Promise<string> {
+  const supabase = createServerSupabase();
+  const { data, error } = await supabase.storage
+    .from(EXTRACTED_TEXT_BUCKET)
+    .download(path);
+
+  if (error) throw error;
+  if (!data) throw new Error("No file data returned");
+  return Buffer.from(await data.arrayBuffer()).toString("utf-8");
 }
