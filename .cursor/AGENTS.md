@@ -4,9 +4,9 @@ This document defines **how the main agent and subagents collaborate** in this p
 
 The **source of truth** for rules and workflows lives in these files:
 
-* **Rules**: `project-foundation.md`, `frontend-system-css.md`, `ai-integration.md`
-* **Skills**: `implement-screen-from-spec`, `implement-llm-json-route`, `retro-ui-review`, `supabase-crud-scaffold`
-* **Subagents**: `screen-implementer`, `ai-route-implementer`, `retro-ui-reviewer`, `supabase-data-agent`
+- **Rules**: `project-foundation.md`, `frontend-system-css.md`, `ai-integration.md`
+- **Skills**: `implement-screen-from-spec`, `implement-llm-json-route`, `retro-ui-review`, `supabase-crud-scaffold`
+- **Subagents**: `screen-implementer`, `ai-route-implementer`, `retro-ui-reviewer`, `supabase-data-agent`
 
 ---
 
@@ -31,37 +31,36 @@ The **Main Agent** should consult these documents before planning significant wo
 
 **Design**
 
-* UI must follow **system.css** and a **retro Macintosh aesthetic**.
+- UI must follow **system.css** and a **retro Macintosh aesthetic**.
 
 **Coding**
 
-* Next.js **App Router**
-* **TypeScript**
-* **ESLint (flat config)**
-* `next/core-web-vitals`
-* strict TypeScript rules
+- Next.js **App Router**
+- **TypeScript**
+- **ESLint (flat config)**
+- `next/core-web-vitals`
+- strict TypeScript rules
 
 **Architecture**
 
-* **Server Components by default**
-* Client Components only when strictly necessary and kept small
+- **Server Components by default**
+- Client Components only when strictly necessary and kept small
 
 **Data**
 
-* Supabase logic must exist **only in server-side modules**
+- Supabase logic must exist **only in server-side modules**
 
 **AI**
 
-* All LLM responses must follow:
-
-  * **JSON-only output**
-  * explicit schema
-  * runtime validation
-  * **BYOK (Bring Your Own Key)** provider abstraction
+- All LLM responses must follow:
+  - **JSON-only output**
+  - explicit schema
+  - runtime validation
+  - **BYOK (Bring Your Own Key)** provider abstraction
 
 **Git**
 
-* All commit messages must follow the rules defined in
+- All commit messages must follow the rules defined in
   `.cursor/rules/git-commit.md`
 
 Subagents **MUST follow these rules** and keep a **narrow responsibility boundary**.
@@ -72,34 +71,34 @@ Subagents **MUST follow these rules** and keep a **narrow responsibility boundar
 
 ## Role
 
-* Coordinate work between subagents.
-* Decide **which subagent or skill** should handle a given task.
-* Maintain architectural consistency across rules, skills, hooks, and subagents.
-* Handle small cross-cutting edits that do not justify delegating work.
+- Coordinate work between subagents.
+- Decide **which subagent or skill** should handle a given task.
+- Maintain architectural consistency across rules, skills, hooks, and subagents.
+- Handle small cross-cutting edits that do not justify delegating work.
 
 ## When to use
 
-* The task spans multiple domains (UI + data + AI).
-* A feature needs end-to-end planning before implementation.
-* Updating project-wide rules, hooks, or agent definitions.
+- The task spans multiple domains (UI + data + AI).
+- A feature needs end-to-end planning before implementation.
+- Updating project-wide rules, hooks, or agent definitions.
 
 ## When not to use
 
-* The task clearly belongs to a specialized subagent.
-* A skill already exists that fully defines the task.
+- The task clearly belongs to a specialized subagent.
+- A skill already exists that fully defines the task.
 
 ## Completion Criteria
 
-* The task is delegated to the correct subagent(s).
-* Clear **handoff instructions** exist.
-* Important architectural decisions are documented briefly.
+- The task is delegated to the correct subagent(s).
+- Clear **handoff instructions** exist.
+- Important architectural decisions are documented briefly.
 
 ## Handoff Targets
 
-* **Screen Implementer** → UI and page structure
-* **AI Route Implementer** → LLM routes and schemas
-* **Retro UI Reviewer** → visual QA
-* **Supabase Data Agent** → database helpers and CRUD
+- **Screen Implementer** → UI and page structure
+- **AI Route Implementer** → LLM routes and schemas
+- **Retro UI Reviewer** → visual QA
+- **Supabase Data Agent** → database helpers and CRUD
 
 ## Cursor Workflow Logging
 
@@ -111,10 +110,10 @@ For multi-step or cross-agent workflows, the Main Agent **SHOULD append an entry
 
 The entry should include:
 
-* User intent
-* Subagents used
-* Skills invoked
-* Artifacts created or modified
+- User intent
+- Subagents used
+- Skills invoked
+- Artifacts created or modified
 
 ---
 
@@ -124,35 +123,35 @@ The entry should include:
 
 Responsible for implementing UI screens based on screen specifications.
 
-* Create pages under `app/.../page.tsx`
-* Prefer **Server Components**
-* Extract minimal Client Components when necessary
-* Follow **system.css retro UI primitives**
+- Create pages under `app/.../page.tsx`
+- Prefer **Server Components**
+- Extract minimal Client Components when necessary
+- Follow **system.css retro UI primitives**
 
 ## When to use
 
-* Creating a new route UI
-* Refactoring an existing screen to follow RSC or system.css rules
+- Creating a new route UI
+- Refactoring an existing screen to follow RSC or system.css rules
 
 ## When not to use
 
-* Designing AI routes → use **AI Route Implementer**
-* Implementing database logic → use **Supabase Data Agent**
-* Pure UI review → use **Retro UI Reviewer**
+- Designing AI routes → use **AI Route Implementer**
+- Implementing database logic → use **Supabase Data Agent**
+- Pure UI review → use **Retro UI Reviewer**
 
 ## Expected Input
 
-* Route path and file location
-* Screen purpose and user actions
-* Section layout (panels, forms, lists)
-* Which APIs or server helpers will be called
+- Route path and file location
+- Screen purpose and user actions
+- Section layout (panels, forms, lists)
+- Which APIs or server helpers will be called
 
 ## Expected Output
 
-* Proper App Router page scaffold
-* system.css compatible markup
-* Server Component structure
-* Only references to server APIs or helpers (no direct DB logic)
+- Proper App Router page scaffold
+- system.css compatible markup
+- Server Component structure
+- Only references to server APIs or helpers (no direct DB logic)
 
 ## Reference Rules and Skills
 
@@ -171,15 +170,15 @@ implement-screen-from-spec
 
 ## Completion Criteria
 
-* Page scaffold exists at correct `app/.../page.tsx`
-* Client Components minimized
-* No database or LLM logic inside UI
+- Page scaffold exists at correct `app/.../page.tsx`
+- Client Components minimized
+- No database or LLM logic inside UI
 
 ## Handoff Targets
 
-* Database helpers needed → **Supabase Data Agent**
-* AI route needed → **AI Route Implementer**
-* Visual review needed → **Retro UI Reviewer**
+- Database helpers needed → **Supabase Data Agent**
+- AI route needed → **AI Route Implementer**
+- Visual review needed → **Retro UI Reviewer**
 
 ---
 
@@ -197,34 +196,34 @@ app/api/.../route.ts
 
 Responsibilities include:
 
-* JSON-only contract enforcement
-* input/output schema definition
-* runtime validation
-* BYOK provider abstraction
+- JSON-only contract enforcement
+- input/output schema definition
+- runtime validation
+- BYOK provider abstraction
 
 ## When to use
 
-* Creating new AI routes
-* Adding schema validation to existing routes
+- Creating new AI routes
+- Adding schema validation to existing routes
 
 ## When not to use
 
-* UI layout → Screen Implementer
-* database CRUD → Supabase Data Agent
+- UI layout → Screen Implementer
+- database CRUD → Supabase Data Agent
 
 ## Expected Input
 
-* API path
-* AI task description
-* input/output JSON schema
-* LLM provider abstraction location
+- API path
+- AI task description
+- input/output JSON schema
+- LLM provider abstraction location
 
 ## Expected Output
 
-* Route handler scaffold
-* JSON schema and runtime validation
-* Server-only LLM invocation
-* Structured error responses
+- Route handler scaffold
+- JSON schema and runtime validation
+- Server-only LLM invocation
+- Structured error responses
 
 ## Reference Rules and Skills
 
@@ -243,14 +242,14 @@ implement-llm-json-route
 
 ## Completion Criteria
 
-* `route.ts` exists with JSON schema validation
-* LLM calls are **server-only**
-* Errors return structured JSON responses
+- `route.ts` exists with JSON schema validation
+- LLM calls are **server-only**
+- Errors return structured JSON responses
 
 ## Handoff Targets
 
-* UI needs to call the route → **Screen Implementer**
-* AI results stored in DB → **Supabase Data Agent**
+- UI needs to call the route → **Screen Implementer**
+- AI results stored in DB → **Supabase Data Agent**
 
 ---
 
@@ -264,24 +263,24 @@ Provides **feedback only** (no implementation).
 
 ## When to use
 
-* Reviewing new screens
-* Detecting modern UI elements that break retro consistency
+- Reviewing new screens
+- Detecting modern UI elements that break retro consistency
 
 ## When not to use
 
-* Implementing layout changes
-* Changing backend or AI logic
+- Implementing layout changes
+- Changing backend or AI logic
 
 ## Expected Input
 
-* page or component files
-* relevant CSS or Tailwind
-* optional screenshot
+- page or component files
+- relevant CSS or Tailwind
+- optional screenshot
 
 ## Expected Output
 
-* Pass / Fix Required verdict
-* Short actionable suggestions
+- Pass / Fix Required verdict
+- Short actionable suggestions
 
 ## Reference Rules and Skills
 
@@ -300,12 +299,12 @@ retro-ui-review
 
 ## Completion Criteria
 
-* Clear pass or fail
-* Concrete improvement suggestions
+- Clear pass or fail
+- Concrete improvement suggestions
 
 ## Handoff Target
 
-* Implementation required → **Screen Implementer**
+- Implementation required → **Screen Implementer**
 
 ---
 
@@ -317,32 +316,32 @@ Design server-side data access patterns for Supabase.
 
 Responsibilities:
 
-* CRUD helper modules
-* server-only data access
-* ownership and authorization logic
+- CRUD helper modules
+- server-only data access
+- ownership and authorization logic
 
 ## When to use
 
-* Creating CRUD helpers for a new entity
-* Extracting database logic out of UI
+- Creating CRUD helpers for a new entity
+- Extracting database logic out of UI
 
 ## When not to use
 
-* UI implementation
-* AI route logic
+- UI implementation
+- AI route logic
 
 ## Expected Input
 
-* entity name
-* table schema
-* field types
-* access patterns
-* ownership rules
+- entity name
+- table schema
+- field types
+- access patterns
+- ownership rules
 
 ## Expected Output
 
-* server-only CRUD helpers
-* clear usage examples for App Router routes or server actions
+- server-only CRUD helpers
+- clear usage examples for App Router routes or server actions
 
 ## Reference Rules and Skills
 
@@ -361,11 +360,11 @@ supabase-crud-scaffold
 
 ## Completion Criteria
 
-* CRUD helpers exist in server modules
-* database access removed from UI
-* ownership rules clearly defined
+- CRUD helpers exist in server modules
+- database access removed from UI
+- ownership rules clearly defined
 
 ## Handoff Targets
 
-* UI using these helpers → **Screen Implementer**
-* AI routes reading/writing data → **AI Route Implementer**
+- UI using these helpers → **Screen Implementer**
+- AI routes reading/writing data → **AI Route Implementer**

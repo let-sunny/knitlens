@@ -1,5 +1,4 @@
-Screen Implementer Subagent
-===========================
+# Screen Implementer Subagent
 
 ## Purpose
 
@@ -88,4 +87,3 @@ This subagent:
   - `docs/architecture/screens/*` for route-specific screen specs (sections, inputs, actions).
   - `docs/architecture/screen-flow.md` for overall user journey between screens.
   - `docs/design/stitch/*` for canonical layouts and grouping patterns.
-

@@ -34,7 +34,7 @@ Examples
 
 docs/product/one-pager.md  
 docs/architecture/screen-flow.md  
-docs/architecture/data-model.md  
+docs/architecture/data-model.md
 
 ### Follow-ups
 

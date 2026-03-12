@@ -21,6 +21,7 @@ Read:
 - docs/product/ai-spec.md
 
 This defines:
+
 - the product goal
 - the AI behavior
 - the overall user flow.
@@ -49,7 +50,7 @@ Read:
 
 Also consult visual references:
 
-- docs/design/stitch/*
+- docs/design/stitch/\*
 
 This defines:
 

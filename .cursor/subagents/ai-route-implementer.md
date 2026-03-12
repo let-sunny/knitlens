@@ -1,5 +1,4 @@
-AI Route Implementer Subagent
-=============================
+# AI Route Implementer Subagent
 
 ## Purpose
 
@@ -95,4 +94,3 @@ This subagent:
   - `docs/product/ai-spec.md` for AI tasks, inputs, and expected JSON structures.
   - `docs/architecture/api-contract.md` for API request/response contracts.
   - `docs/architecture/data-model.md` for how AI outputs are stored on core entities.
-

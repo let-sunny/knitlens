@@ -1,5 +1,4 @@
-Workflow Logging Rules
-======================
+# Workflow Logging Rules
 
 These rules define **when and how** agents must create workflow log entries for this project.
 
@@ -132,10 +131,10 @@ Agents **MUST NOT** rely on partially written JSON; always write a complete obje
 
 To keep logging consistent, agents **SHOULD** follow this procedure:
 
-1. **Execute workflow tasks**  
+1. **Execute workflow tasks**
    - Plan and run the workflow, possibly involving multiple subagents and skills.
 
-2. **Main Agent summarizes the workflow**  
+2. **Main Agent summarizes the workflow**
    - Decide whether this workflow is log-worthy (see section A).
    - If yes, prepare:
      - `title`, `intent`, `summary`
@@ -143,15 +142,14 @@ To keep logging consistent, agents **SHOULD** follow this procedure:
      - `skills` list
      - `artifacts` and `followUp` lists
 
-3. **Write `.cursor/last-workflow.json`**  
+3. **Write `.cursor/last-workflow.json`**
    - Serialize the data into the schema described in section C.
    - Overwrite any existing `.cursor/last-workflow.json`.
 
-4. **Allow Cursor hooks to append the log automatically**  
+4. **Allow Cursor hooks to append the log automatically**
    - When the session or subagent run ends, Cursor hooks will:
      - Invoke `append-workflow-log.js`.
      - Append the formatted entry to `WORKFLOW_LOG.md`.
      - Clean up `.cursor/last-workflow.json`.
 
 This procedure ensures that workflow logs remain **consistent, structured, and generated automatically** without manual edits to the Markdown log.
-

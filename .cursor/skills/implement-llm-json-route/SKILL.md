@@ -1,5 +1,4 @@
-Implement LLM JSON Route
-=========================
+# Implement LLM JSON Route
 
 ## Purpose
 
@@ -84,4 +83,3 @@ When designing AI routes, agents **SHOULD** align with:
 - `docs/product/ai-spec.md` – AI tasks, inputs, and expected JSON output shapes.
 - `docs/architecture/api-contract.md` – API request/response contracts for pattern analysis, clarification, and compilation.
 - `docs/architecture/data-model.md` – how AI outputs are stored on core entities (Project, Pattern, Steps).
-

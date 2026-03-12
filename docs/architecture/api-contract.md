@@ -26,6 +26,7 @@ These shapes are shared across multiple endpoints.
 ```
 
 Question
+
 - id: string
 - text: string
 - type: "choice" | "number" | "text"
@@ -41,6 +42,7 @@ Question
 ```
 
 Answer
+
 - questionId: string
 - value: string | number
 
@@ -49,12 +51,14 @@ Answer
 These shapes align with the `Pattern`, `Section`, `Row`, and `Step` types in the data model.
 
 Section
+
 - id: string
 - title: string
 - order: number
 - rows: Row[]
 
 Row
+
 - id: string
 - order: number
 - instructions: string
@@ -63,6 +67,7 @@ Row
 - steps: Step[]
 
 Step
+
 - id: string
 - order: number
 - instruction: string
@@ -76,6 +81,7 @@ Purpose
 Analyze extracted knitting pattern text using the LLM and generate an initial structured representation.
 
 Notes
+
 - `patternText` is obtained by the server from the uploaded PDF (text extraction step), not typed by the user directly.
 - This route may also return clarification questions if ambiguity is detected.
 
@@ -89,6 +95,7 @@ Request
 ```
 
 Request fields
+
 - projectId: string
 - patternText: string
 
@@ -117,6 +124,7 @@ Response (success)
 ```
 
 Response fields
+
 - patternId: string
 - sections: Section[]
 - questions: Question[] (empty if no clarification needed)
@@ -138,6 +146,7 @@ Purpose
 Generate clarification questions or continue an existing clarification loop.
 
 Typical flow
+
 - Client sends current pattern id and any existing answers.
 - Server calls the LLM to determine whether more clarification is needed.
 
@@ -156,6 +165,7 @@ Request
 ```
 
 Request fields
+
 - patternId: string
 - answers: Answer[]
 
@@ -213,6 +223,7 @@ Request
 ```
 
 Request fields
+
 - patternId: string
 - answers: Answer[]
 
@@ -265,6 +276,7 @@ Purpose
 Return the full project state required for the `/projects/[id]` tracker screen.
 
 Path params
+
 - id: string (project id)
 
 Response (success)
@@ -320,6 +332,7 @@ Purpose
 Update project progress for the tracker screen.
 
 Path params
+
 - id: string (project id)
 
 Request (mark step complete or update repeat count)
@@ -333,6 +346,7 @@ Request (mark step complete or update repeat count)
 ```
 
 Request fields
+
 - stepId: string
 - completed: boolean
 - repeatCount: number | null

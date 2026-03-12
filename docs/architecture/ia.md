@@ -8,6 +8,7 @@ Primary routes:
 /settings
 
 Key entities:
+
 - Project
 - Pattern
 - Step

@@ -125,7 +125,11 @@
           "severity": "block",
           "description": "For LLM routes or AI handlers, require presence of input/output schemas and runtime validation.",
           "triggers": {
-            "globs": ["app/api/**/route.ts", "lib/**/llm/**.ts", "lib/**/ai/**.ts"],
+            "globs": [
+              "app/api/**/route.ts",
+              "lib/**/llm/**.ts",
+              "lib/**/ai/**.ts"
+            ],
             "events": ["fileCreated", "fileModified"]
           },
           "checks": [
@@ -138,7 +142,11 @@
           "severity": "block",
           "description": "Require JSON-only response handling for AI routes and warn if free-form or markdown output is relied on.",
           "triggers": {
-            "globs": ["app/api/**/route.ts", "lib/**/llm/**.ts", "lib/**/ai/**.ts"],
+            "globs": [
+              "app/api/**/route.ts",
+              "lib/**/llm/**.ts",
+              "lib/**/ai/**.ts"
+            ],
             "events": ["fileCreated", "fileModified"]
           },
           "checks": [
@@ -151,7 +159,11 @@
           "severity": "warn",
           "description": "Warn if raw source text preservation is missing when using LLMs to transform user or external text.",
           "triggers": {
-            "globs": ["app/api/**/route.ts", "lib/**/llm/**.ts", "lib/**/ai/**.ts"],
+            "globs": [
+              "app/api/**/route.ts",
+              "lib/**/llm/**.ts",
+              "lib/**/ai/**.ts"
+            ],
             "events": ["fileModified"]
           },
           "checks": [
@@ -220,14 +232,21 @@
       {
         "command": "node .cursor/hooks/append-workflow-log.js",
         "timeout": 5
+      },
+      {
+        "command": "node .cursor/hooks/run-typecheck-lint.js",
+        "timeout": 120
       }
     ],
     "subagentStop": [
       {
         "command": "node .cursor/hooks/append-workflow-log.js",
         "timeout": 5
+      },
+      {
+        "command": "node .cursor/hooks/run-typecheck-lint.js",
+        "timeout": 120
       }
     ]
   }
 }
-

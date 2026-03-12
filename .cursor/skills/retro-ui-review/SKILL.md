@@ -1,5 +1,4 @@
-Retro UI Review
-===============
+# Retro UI Review
 
 ## Purpose
 
@@ -77,4 +76,3 @@ The goal is to **converge on a consistent retro system.css UI**, not to enforce 
 When reviewing UI against retro rules, agents **SHOULD** refer to:
 
 - `docs/design/stitch/*` – Stitch HTML mocks that represent the intended layouts and visual language for key screens.
-

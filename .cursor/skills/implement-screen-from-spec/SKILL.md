@@ -1,5 +1,4 @@
-Implement Screen from Spec
-===========================
+# Implement Screen from Spec
 
 ## Purpose
 
@@ -73,4 +72,3 @@ When implementing or updating screens, agents **SHOULD** consult:
 - `docs/architecture/screens/` – route-specific screen specs (structure, inputs, actions).
 - `docs/architecture/screen-flow.md` – overall user journey across screens.
 - `docs/design/stitch/*` – Stitch HTML mocks for layout, grouping, and visual hierarchy.
-

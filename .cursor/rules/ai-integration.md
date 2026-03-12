@@ -7,13 +7,14 @@ AI routes and integrations **MUST** remain consistent with the following documen
 - `docs/architecture/data-model.md` – how AI outputs map onto core entities (e.g., Project, Pattern, Steps).
 
 ---
+
 description: All LLM integrations must be server-side, JSON-only, schema-validated, BYOK-friendly, and preserve raw source text.
-globs: app/api/**/route.ts,lib/**/llm/**.ts,lib/**/ai/**.ts
+globs: app/api/**/route.ts,lib/**/llm/**.ts,lib/**/ai/\*\*.ts
 alwaysApply: false
+
 ---
 
-AI Integration Rules
-====================
+# AI Integration Rules
 
 These rules are **always on** for any LLM integration.
 
@@ -57,4 +58,3 @@ Example: A classification endpoint returns `{ "label": "todo", "confidence": 0.9
   - Configuration read from environment variables or a provider abstraction.
 - The design **MUST** allow swapping providers via a single abstraction layer so that:
   - Prompting and schema logic are not tied to one vendor SDK.
-

@@ -1,5 +1,4 @@
-Supabase Data Agent Subagent
-============================
+# Supabase Data Agent Subagent
 
 ## Purpose
 
@@ -86,4 +85,3 @@ This subagent:
 - **Docs**
   - `docs/architecture/data-model.md` for canonical fields and relationships of core entities.
   - `docs/architecture/ia.md` for how entities are used across primary routes.
-

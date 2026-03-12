@@ -3,8 +3,7 @@ description: Fixed stack and routing rules for a Next.js App Router + TypeScript
 alwaysApply: true
 ---
 
-Project Foundation Rules
-========================
+# Project Foundation Rules
 
 These rules are **always on** for the whole project.
 
@@ -76,4 +75,3 @@ Agents **MUST** treat the following documents as canonical product and architect
 - `docs/architecture/screen-flow.md` – high-level screen sequence for the main user journey.
 
 The Main Agent **SHOULD** consult these docs before planning or delegating significant work.
-

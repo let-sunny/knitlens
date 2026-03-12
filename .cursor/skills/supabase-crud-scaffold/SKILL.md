@@ -1,5 +1,4 @@
-Supabase CRUD Scaffold
-======================
+# Supabase CRUD Scaffold
 
 ## Purpose
 
@@ -45,7 +44,6 @@ Collect or infer:
 2. **Define minimal CRUD helpers**
 
    For the given entity, create functions such as:
-
    - `create<Entity>()`
    - `get<Entity>ById()`
    - `list<Entities>()`
@@ -53,13 +51,11 @@ Collect or infer:
    - `delete<Entity>()`
 
    Each helper should:
-
    - Accept well-typed parameters (TypeScript).
    - Interact with Supabase using the official client.
    - Handle common error cases explicitly (null results, permission issues).
 
 3. **Integrate with App Router**
-
    - Expose CRUD operations to the UI via:
      - Server actions attached to forms or buttons in Server/Client components.
      - Route handlers under `app/api/.../route.ts` when appropriate.
@@ -69,7 +65,6 @@ Collect or infer:
    - Ensure route paths and server action file locations match established project conventions.
 
 4. **Separate DB logic from UI components**
-
    - Do not:
      - Instantiate Supabase clients directly inside Client Components.
      - Embed SQL or table-specific logic in `page.tsx` or presentational components.
@@ -78,13 +73,11 @@ Collect or infer:
      - Pass only the necessary data and callbacks into Client Components.
 
 5. **Auth and multi-tenant considerations**
-
    - Assume Supabase auth is the source of truth for the current user.
    - Enforce ownership or access rules in the **server-side CRUD helpers**, not the UI.
    - Design helpers to take a `userId` or similar identifier when appropriate.
 
 6. **Deployment alignment**
-
    - Ensure all Supabase usage is compatible with Vercel:
      - Use environment variables for Supabase URL and anon/service keys.
      - Avoid long-lived connections; rely on HTTP-based client calls.
@@ -106,4 +99,3 @@ When defining entities and CRUD helpers, agents **SHOULD** use:
 
 - `docs/architecture/data-model.md` – canonical fields, relations, and statuses for core entities.
 - `docs/architecture/ia.md` – how entities map onto primary routes and information architecture.
-

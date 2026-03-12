@@ -4,8 +4,7 @@ globs: app/**/*.tsx,components/**/*.tsx,app/**/*.css
 alwaysApply: false
 ---
 
-Frontend System CSS Rules
-=========================
+# Frontend System CSS Rules
 
 These UI rules are **always on** for all frontend work.
 
@@ -63,4 +62,3 @@ For concrete layouts and grouping patterns, agents **SHOULD** refer to the Stitc
 - `docs/design/stitch/*`
 
 when deciding how to structure screens, while still applying system.css and retro rules.
-

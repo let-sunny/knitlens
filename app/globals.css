@@ -1,9 +1,18 @@
+@import "@sakun/system.css";
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "SF Pro Icons", "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "SF Pro Icons",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 }
 
 * {
@@ -28,4 +37,3 @@ p {
   text-align: center;
   line-height: 1.5;
 }
-

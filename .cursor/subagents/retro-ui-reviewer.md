@@ -1,5 +1,4 @@
-Retro UI Reviewer Subagent
-==========================
+# Retro UI Reviewer Subagent
 
 ## Purpose
 
@@ -73,4 +72,3 @@ This subagent:
     - Shape of review output (verdict + action list).
 - **Docs**
   - `docs/design/stitch/*` for canonical layouts and visual patterns used as retro design references.
-

@@ -1,9 +1,11 @@
 # KnitLens — Product One Pager
 
 ## Product Overview
+
 KnitLens is an AI‑assisted knitting project tracker that converts narrative knitting patterns into structured step-by-step workflows.
 
 Users upload a PDF knitting pattern. The system:
+
 1. extracts narrative text from the PDF
 2. analyzes the extracted pattern using an LLM
 3. asks clarification questions when instructions are ambiguous
@@ -13,6 +15,7 @@ Users upload a PDF knitting pattern. The system:
 The goal is to make long narrative knitting patterns easier to follow and manage.
 
 ## Problem
+
 Most knitting patterns are written as long narrative instructions.  
 Typical issues:
 
@@ -22,6 +25,7 @@ Typical issues:
 - Users manually track progress using paper or markers
 
 Example pattern instructions:
+
 - "Repeat rows 3–6 five times."
 - "For size M increase every 4 rows."
 - "Continue until piece measures 20 cm."
@@ -29,6 +33,7 @@ Example pattern instructions:
 These instructions are readable but not structured for step tracking.
 
 ## Solution
+
 KnitLens converts narrative patterns into structured workflows.
 
 Flow:
@@ -40,15 +45,19 @@ Pattern text
 → interactive knitting tracker
 
 ## Target Users
+
 Primary:
+
 - Hobby knitters using written patterns
 - Intermediate knitters working on garments
 
 Secondary:
+
 - Beginners learning to interpret patterns
 - Knitters working with complex projects
 
 ## Core User Flow
+
 1. Create Project
    - Upload PDF pattern file
    - Enter project title
@@ -70,7 +79,9 @@ Secondary:
    - User marks steps as complete while knitting
 
 ## MVP Scope
+
 Included:
+
 - Pattern PDF upload
 - Text extraction from PDF
 - AI interpretation
@@ -79,11 +90,13 @@ Included:
 - Progress tracker
 
 Excluded:
+
 - Pattern image parsing
 - Multi-user collaboration
 - Advanced analytics
 
 ## Success Criteria
+
 - Users can convert a narrative pattern into a structured tracker
 - AI clarification reduces ambiguity
 - Progress tracking works reliably

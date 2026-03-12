@@ -12,10 +12,10 @@ Many knitting patterns are distributed as PDFs that are difficult to read and fo
 
 Common issues include:
 
-- inconsistent formatting  
-- multiple sizes mixed into one instruction  
-- ambiguous pattern instructions  
-- long condensed text blocks  
+- inconsistent formatting
+- multiple sizes mixed into one instruction
+- ambiguous pattern instructions
+- long condensed text blocks
 
 These patterns are often hard to track while knitting, especially for beginners.
 
@@ -27,11 +27,11 @@ KnitLens converts knitting pattern PDFs into structured, step-by-step instructio
 
 The system:
 
-1. extracts text from a knitting pattern PDF  
-2. analyzes the pattern using AI  
-3. asks clarification questions if needed  
-4. compiles a clean structured pattern  
-5. provides a row-by-row project tracker  
+1. extracts text from a knitting pattern PDF
+2. analyzes the pattern using AI
+3. asks clarification questions if needed
+4. compiles a clean structured pattern
+5. provides a row-by-row project tracker
 
 ---
 
@@ -45,16 +45,16 @@ Upload a knitting pattern PDF to start a new project.
 
 AI analyzes the pattern text and extracts:
 
-- sections  
-- rows  
-- instructions  
+- sections
+- rows
+- instructions
 
 ### Clarification Loop
 
 If the pattern contains ambiguity, KnitLens asks questions such as:
 
-- Which size are you knitting?  
-- Which yarn weight should be used?  
+- Which size are you knitting?
+- Which yarn weight should be used?
 
 User answers help the AI generate a more accurate pattern structure.
 
@@ -96,20 +96,20 @@ Project Tracker
 
 ### Frontend
 
-- Next.js (App Router)  
-- TypeScript  
-- system.css (retro Macintosh-style UI)  
+- Next.js (App Router)
+- TypeScript
+- system.css (retro Macintosh-style UI)
 
 ### Backend
 
-- Next.js Route Handlers  
-- Supabase  
+- Next.js Route Handlers
+- Supabase
 
 ### AI
 
-- LLM provider (BYOK)  
-- JSON-only responses  
-- runtime schema validation  
+- LLM provider (BYOK)
+- JSON-only responses
+- runtime schema validation
 
 ---
 
@@ -167,15 +167,14 @@ AI agents operate according to rules defined in:
 
 ### MVP
 
-- PDF upload  
-- AI pattern analysis  
-- clarification questions  
-- structured pattern generation  
-- row-by-row tracker  
+- PDF upload
+- AI pattern analysis
+- clarification questions
+- structured pattern generation
+- row-by-row tracker
 
 ### Future
 
-- multiple project management  
-- pattern sharing  
-- mobile companion app  
-
+- multiple project management
+- pattern sharing
+- mobile companion app
